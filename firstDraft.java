@@ -78,17 +78,68 @@ public class EditDistance {
     
   
     public static void main(String args[]) {
-        String str1 = "AAAB"; 
-        String str2 = "AABB"; 
-        System.out.println("Edit distance: "+ editDistance( str1 , str2 , str1.length(), str2.length()) ); 
-    
-        Scanner in = new Scanner(System.in);
-		int n = 1; //n is the # of pairs of strings, in this case to keep it simple it's just the pair str1 and str2 to keep it simple
-		for(int i=0; i<n; i++) {
-			String s1 = str1;
-			String s2 = str2;
-			System.out.println("LCS: " +LCS(str1, str2));
-		}
-		//readTextFileUsingScanner("small.txt"); this doesn't work because idk how to read the file lol 
-    } 
+      String str1 = "AAAB";
+			String str2 = "AABB";
+			System.out.println("Edit distance: " + editDistance(str1, str2, str1.length(), str2.length()));
+
+			ArrayList<String> arr = new ArrayList<String>();
+			
+			
+			int n = 1; // n is the # of pairs of strings, in this case to keep it simple it's just the
+						// pair str1 and str2 to keep it simple
+			for (int i = 0; i < n; i++) {
+				String s1 = str1;
+				String s2 = str2;
+				
+				//
+				
+				System.out.println("LCS: " + LCS(str1, str2));
+			}
+			
+			
+			boolean first = true;
+			
+
+	        try (Scanner scanner = new Scanner(System.in); ) {
+	        	//before we reach the % sign on last line
+	        	String seq = null;
+	            while(scanner.hasNextLine()) { //scanner.hasnextline() not working, needed to add % sign at end of both files
+	                
+	            	String line = scanner.nextLine().trim();
+	            
+	            	
+	                if (line.startsWith(">")) {
+	                	
+	                	//add the sequence to the array and then reset the sequence var
+	                	
+	                	arr.add(seq);
+	                	seq = "";
+
+	                    	
+	                } else {
+	                
+	                	//add each line of sequence to the seq variable, in order to get the full sequence
+	                	String line2;
+	                	line2 = line.substring(line.indexOf(" ") + 1);
+	                	line2.trim();
+	                	
+	                	seq = seq + line2;
+	                	System.out.println(arr);
+	                    
+	                }
+	
+	            }
+	            
+	            
+	        }
+	        
+	       //System.out.println();
+			 
+	       //iterate through array of the DNA sequences and find LCS of each one compared to each other
+	       for(int i = 0; i < arr.size(); i++) {
+	    	   System.out.println("LCS: " + LCS(arr.get(i), arr.get(i + 1)));
+	
+	       }
+
+	       System.out.println(arr);
 }
